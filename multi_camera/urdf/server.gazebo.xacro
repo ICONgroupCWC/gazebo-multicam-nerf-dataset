@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<robot name="turtlebot3_burger_sim" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Yellow</material>
+  </gazebo>
+
+  <gazebo reference="antenna_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+<gazebo reference="case_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <!-- <gazebo reference="server/server_base_link">
+      <sensor name="wirelessTransmitter" type="wireless_transmitter">
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <visualize>true</visualize>
+        <transceiver>
+          <essid>osrf</essid>
+          <frequency>2442</frequency>
+          <power>18</power>
+          <gain>2.3</gain>
+        </transceiver>
+      </sensor>
+    </gazebo>
+
+   <gazebo reference="/server/server_base_link">
+      <sensor name="wirelessReceiver" type="wireless_receiver">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <visualize>true</visualize>
+        <transceiver>
+          <min_frequency>2412</min_frequency>
+          <max_frequency>2412</max_frequency>
+          <gain>2.3</gain>
+          <sensitivity>-90</sensitivity>
+        </transceiver>
+        <plugin name="wireless_receiver_ros_plugin" filename="libgazebo_ros_wireless_comm_lib.so">
+          <robotNamespace>server</robotNamespace>
+          <commMinFreq>2412</commMinFreq>
+          <commMaxFreq>5884</commMaxFreq>
+          <measMinFreq>2412</measMinFreq>
+          <measMaxFreq>5884</measMaxFreq>
+          <commNoiseFloor>-340</commNoiseFloor>
+          <commByteNum>40</commByteNum>
+          <commIdFreq>2442</commIdFreq>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>50</updateRate>
+        </plugin>
+      </sensor>
+    </gazebo> -->
+
+</robot>

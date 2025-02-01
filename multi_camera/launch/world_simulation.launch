@@ -1,0 +1,118 @@
+<launch>
+  <arg name="model" default="burger" doc="model type [burger, waffle, waffle_pi]"/>
+    <arg name="first_jetbot" default="jb_0"/>
+    <arg name="second_jetbot" default="jb_1"/>
+    <arg name="third_jetbot" default="camera_1"/>
+    <arg name="fourth_jetbot" default="camera_2"/>
+    <arg name="fiveth_jetbot" default="camera_3"/>
+
+ 
+  <arg name="first_jb_x_pos" default="-3.0"/>
+  <arg name="first_jb_y_pos" default="-1.0"/>
+  <arg name="first_jb_z_pos" default=" 0.0"/>
+  <arg name="first_jb_yaw"   default=" 1.7"/>
+ 
+  <arg name="second_jb_x_pos" default=" 0.0"/>
+  <arg name="second_jb_y_pos" default="-8.0"/>
+  <arg name="second_jb_z_pos" default=" 0.0"/>
+  <arg name="second_jb_yaw"   default=" 0"/>
+
+  <arg name="third_jb_x_pos" default=" -9.944382"/>
+  <arg name="third_jb_y_pos" default="-0.318042"/>
+  <arg name="third_jb_z_pos" default=" 0"/>
+  <arg name="third_jb_yaw"   default=" -0.943787"/>
+
+  <arg name="fourth_jb_x_pos" default=" -9.917057"/>
+  <arg name="fourth_jb_y_pos" default="-9.841491"/>
+  <arg name="fourth_jb_z_pos" default=" 0.0"/>
+  <arg name="fourth_jb_yaw"   default=" 0.676506"/>
+
+  <arg name="fiveth_jb_x_pos" default=" -2.414609"/>
+  <arg name="fiveth_jb_y_pos" default="-9.853471"/>
+  <arg name="fiveth_jb_z_pos" default=" 0.0"/>
+  <arg name="fiveth_jb_yaw"   default=" 2.432570"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+     <arg name="world_name" value="$(find navigation_module)/worlds/jetbot_house.world"/> 
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>  
+
+  <group ns = "$(arg first_jetbot)">
+    <param name="robot_description" command="$(find xacro)/xacro --inorder $(find multi_camera)/urdf/jetbot_real.urdf.xacro botname:=$(arg first_jetbot)" />
+    
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg first_jetbot)" />
+    </node>
+
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg first_jetbot) -x $(arg first_jb_x_pos) -y $(arg first_jb_y_pos) -z $(arg first_jb_z_pos) -Y $(arg first_jb_yaw) -param robot_description" />
+  
+    
+  
+  </group>
+  
+  <!-- <group ns = "$(arg second_jetbot)">
+    <param name="robot_description" command="$(find xacro)/xacro  $(find multi_camera)/urdf/jetbot_csi.urdf.xacro botname:=$(arg second_jetbot)" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg second_jetbot)" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg second_jetbot) -x $(arg second_jb_x_pos) -y $(arg second_jb_y_pos) -z $(arg second_jb_z_pos) -Y $(arg second_jb_yaw) -param robot_description" />
+
+
+  </group> -->
+  
+
+  <group ns = "$(arg third_jetbot)">
+    <param name="robot_description" command="$(find xacro)/xacro  $(find multi_camera)/urdf/cameras.urdf.xacro "  />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg third_jetbot)" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg third_jetbot) -x $(arg third_jb_x_pos) -y $(arg third_jb_y_pos) -z $(arg third_jb_z_pos) -Y $(arg third_jb_yaw) -param robot_description" />
+
+
+  </group>
+
+    <group ns = "$(arg fourth_jetbot)">
+    <param name="robot_description" command="$(find xacro)/xacro  $(find multi_camera)/urdf/cameras.urdf.xacro "  />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg fourth_jetbot)" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg fourth_jetbot) -x $(arg fourth_jb_x_pos) -y $(arg fourth_jb_y_pos) -z $(arg fourth_jb_z_pos) -Y $(arg fourth_jb_yaw) -param robot_description" />
+
+
+  </group>
+
+    <group ns = "$(arg fiveth_jetbot)">
+    <param name="robot_description" command="$(find xacro)/xacro  $(find multi_camera)/urdf/cameras.urdf.xacro "  />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg fiveth_jetbot)" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg fiveth_jetbot) -x $(arg fiveth_jb_x_pos) -y $(arg fiveth_jb_y_pos) -z $(arg fiveth_jb_z_pos) -Y $(arg fiveth_jb_yaw) -param robot_description" />
+
+
+  </group>
+  
+ <node pkg="joy" type="joy_node" name="joy_node"/>
+
+ <node pkg="multi_camera" type="drive.py" name="drive" output="screen" />  
+
+      
+</launch>
+

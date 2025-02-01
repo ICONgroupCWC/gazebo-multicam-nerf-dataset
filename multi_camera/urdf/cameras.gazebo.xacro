@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<robot name="turtlebot3_burger_sim" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <gazebo reference="camera1_mount">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+  <gazebo reference="camera1_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+ <gazebo reference="camera1_link">
+      <sensor type="camera" name="camera1">
+        <update_rate>30.0</update_rate>
+        <camera name="head">
+          <horizontal_fov>1.3962634</horizontal_fov>
+          <image>
+            <width>640</width>
+            <height>480</height>
+            <format>R8G8B8</format>
+          </image>
+          <clip>
+            <near>0.3</near>
+            <far>300</far>
+          </clip>
+          <noise>
+            <type>gaussian</type>
+            <mean>0.0</mean>
+            <stddev>0.007</stddev>
+          </noise>
+        </camera>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>0.0</updateRate>
+          <imageTopicName>image_raw</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>camera1_link</frameName>
+          <hackBaseline>0.07</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+    </gazebo>
+
+
+  <!-- <gazebo reference="antenna_link">
+    <material>Gazebo/Grey</material>
+  </gazebo>
+
+<gazebo reference="case_link">
+    <material>Gazebo/Grey</material>
+  </gazebo> -->
+
+  <!-- <gazebo reference="server/server_base_link">
+      <sensor name="wirelessTransmitter" type="wireless_transmitter">
+        <always_on>1</always_on>
+        <update_rate>50</update_rate>
+        <visualize>true</visualize>
+        <transceiver>
+          <essid>osrf</essid>
+          <frequency>2442</frequency>
+          <power>18</power>
+          <gain>2.3</gain>
+        </transceiver>
+      </sensor>
+    </gazebo>
+
+   <gazebo reference="/server/server_base_link">
+      <sensor name="wirelessReceiver" type="wireless_receiver">
+        <always_on>true</always_on>
+        <update_rate>50</update_rate>
+        <visualize>true</visualize>
+        <transceiver>
+          <min_frequency>2412</min_frequency>
+          <max_frequency>2412</max_frequency>
+          <gain>2.3</gain>
+          <sensitivity>-90</sensitivity>
+        </transceiver>
+        <plugin name="wireless_receiver_ros_plugin" filename="libgazebo_ros_wireless_comm_lib.so">
+          <robotNamespace>server</robotNamespace>
+          <commMinFreq>2412</commMinFreq>
+          <commMaxFreq>5884</commMaxFreq>
+          <measMinFreq>2412</measMinFreq>
+          <measMaxFreq>5884</measMaxFreq>
+          <commNoiseFloor>-340</commNoiseFloor>
+          <commByteNum>40</commByteNum>
+          <commIdFreq>2442</commIdFreq>
+          <alwaysOn>true</alwaysOn>
+          <updateRate>50</updateRate>
+        </plugin>
+      </sensor>
+    </gazebo> -->
+
+</robot>
